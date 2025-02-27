@@ -1,0 +1,216 @@
+[
+    {
+        "stage": "13",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Pagumon.gif"
+    },
+    {
+        "stage": "19",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/DemiMeramon.gif"
+    },
+    {
+        "stage": "24",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Gazimon.gif"
+    },
+    {
+        "stage": "29",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Kuwagamon.gif"
+    },
+    {
+        "stage": "34",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Shellmon.gif"
+    },
+    {
+        "stage": "39",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Seadramon.gif"
+    },
+    {
+        "stage": "44",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Meramon.gif"
+    },
+    {
+        "stage": "54",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/KyodaiNumemon2.gif"
+    },
+    {
+        "bp": "1836",
+        "stage": "64",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Centarumon.gif"
+    },
+    {
+        "bp": "1836",
+        "stage": "64",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Unimon.gif"
+    },
+    {
+        "bp": "2312",
+        "stage": "49",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Andromon.gif"
+    },
+    {
+        "bp": "1871",
+        "stage": "69",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Frigimon.gif"
+    },
+    {
+        "bp": "1823",
+        "stage": "72",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Devimon.gif"
+    },
+    {
+        "bp": "1809",
+        "stage": "81",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/DarkTyrannomon.gif"
+    },
+    {
+        "bp": "2350",
+        "stage": "86",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/SkullGreymon2.gif"
+    },
+    {
+        "bp": "2350",
+        "stage": "89",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Kokatorimon.gif"
+    },
+    {
+        "bp": "2496",
+        "stage": "142",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Piximon.gif"
+    },
+    {
+        "bp": "2496",
+        "stage": "92",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Etemon.gif"
+    },
+    {
+        "bp": "3786",
+        "stage": "95",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Digitamamon.gif"
+    },
+    {
+        "bp": "3926",
+        "stage": "98",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Vademon.gif"
+    },
+    {
+        "bp": "3786",
+        "stage": "101",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/ShogunGekomon.gif"
+    },
+    {
+        "bp": "3123",
+        "stage": "104",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Gatomon46202.gif"
+    },
+    {
+        "bp": "3123",
+        "stage": "107",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Pumpkinmon.gif"
+    },
+    {
+        "bp": "4436",
+        "stage": "110",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/VenomMyotismon.gif"
+    },
+    {
+        "bp": "4436",
+        "stage": "113",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Whamon.gif"
+    },
+    {
+        "bp": "4436",
+        "stage": "116",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/MarineDevimon.gif"
+    },
+    {
+        "bp": "4436",
+        "stage": "117",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/MetalSeadramon.gif"
+    },
+    {
+        "bp": "4436",
+        "stage": "120",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Parasimon.gif"
+    },
+    {
+        "bp": "4436",
+        "stage": "123",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Rosemon.gif"
+    },
+    {
+        "bp": "4436",
+        "stage": "124",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Puppetmon.gif"
+    },
+    {
+        "bp": "4436",
+        "stage": "127",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/RustTyranomon19480.gif"
+    },
+    {
+        "bp": "4436",
+        "stage": "130",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/MetalEtemon.gif"
+    },
+    {
+        "bp": "4757",
+        "stage": "131",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Machinedramon.gif"
+    },
+    {
+        "bp": "4757",
+        "stage": "134",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Ghoulmon%20(Black)9966.gif"
+    },
+    {
+        "bp": "4757",
+        "stage": "137",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Callismon.gif"
+    },
+    {
+        "bp": "4757",
+        "stage": "138",
+        "cooldown": "90",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Piedmon.gif"
+    },
+    {
+        "bp": "4757",
+        "stage": "139",
+        "cooldown": "720",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Apocalymon.gif"
+    }
+]

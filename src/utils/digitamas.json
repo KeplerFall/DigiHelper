@@ -1,0 +1,32 @@
+[
+    {
+        "stage": "143",
+        "cooldown": "15",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorimon.gif"
+    },
+    {
+        "stage": "144",
+        "cooldown": "30",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorumon.gif"
+    },
+    {
+        "stage": "145",
+        "cooldown": "45",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorugamon.gif"
+    },
+    {
+        "stage": "146",
+        "cooldown": "60",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/DoruGreymon.gif"
+    },
+    {
+        "stage": "146",
+        "cooldown": "60",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/DoruGreymon.gif"
+    },
+    {
+        "stage": "381",
+        "cooldown": "70",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorugoramon.gif"
+    }
+]
