@@ -1,7 +1,8 @@
 # DigiPets Helper
 Versão 1.0.1
-
-## Funcionalidades
+### Link oficial da extensão.
+[Chrome Extension Store](https://chromewebstore.google.com/detail/digipets-helper/fofabjnjiieenlcihcmlgpilcmidcnbp?authuser=0&hl=pt-BR)
+### Funcionalidades
 
 ### V1.0.0
 
