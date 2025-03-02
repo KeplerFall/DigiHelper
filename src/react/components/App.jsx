@@ -28,10 +28,11 @@ const App = () => {
           <img src={`https://www.svgrepo.com/show/513832/info-circle.svg`} width={30} alt="" />
           <div onClick={() => setCurrentState("infos")} style={{margin: '10px 0'}} className=" cursor-pointer bg-[#337ab7] text-white font-bold py-2 px-4 rounded-sm w-full text-center">Informações</div>
         </div>
+        {/*
         <div className="flex flex-col items-center">
           <img src={`https://www.svgrepo.com/show/479915/daily-calendar.svg`} width={30} alt="" />
           <div onClick={() => setCurrentState("daily")} style={{margin: '10px 0'}} className=" cursor-pointer bg-[#337ab7] text-white font-bold py-2 px-4 rounded-sm w-full text-center">Diários</div>
-        </div>
+        </div>*/}
       </div>
       : currentState == "bossrush" ?
       <div>

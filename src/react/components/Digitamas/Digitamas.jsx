@@ -7,7 +7,7 @@ export default function Digitamas() {
     const [cooldownAlert, setCooldownAlert] = useState([])
 
     useEffect(() => {
-        chrome.storage.local.get(["bossCooldown"], (data) => {
+        chrome.storage.local.get(["bossCooldown", "bossAlert"], (data) => {
             setCooldownAlert(data?.bossAlert || []);
             setBossList(data?.bossCooldown || []);
         });
@@ -43,12 +43,16 @@ export default function Digitamas() {
     };
 
     const toggleAlarmList = (arg) =>{
+        console.log("Argumento", arg)
         chrome.storage.local.get(["bossAlert"], ({bossAlert}) => {
             if(!bossAlert){
+                console.log(`Não te ba`)
                 chrome.storage.local.set({bossAlert: [arg]});
             }else if(bossAlert.includes(arg)){
+                console.log(`Tem to tirando`)
                 chrome.storage.local.set({bossAlert: bossAlert.filter(item => item != arg)})
             }else{
+                console.log(`Não tem to adicionando`)
                 chrome.storage.local.set({bossAlert: [...bossAlert, arg]})
             }
         });

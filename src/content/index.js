@@ -822,34 +822,40 @@ const bossInfo = [
 
 const digitamas = [
     {
+        "bossName": "Dorimon",
         "stage": "143",
         "cooldown": "15",
-        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorimon.gif"
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorimon.gif",
+        "bp": "175"
+        
     },
     {
+        "bossName": "Dorumon",
         "stage": "144",
         "cooldown": "30",
-        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorumon.gif"
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorumon.gif",
+        "bp": "468"
     },
     {
+        "bossName": "Dorugamon",
         "stage": "145",
         "cooldown": "45",
-        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorugamon.gif"
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorugamon.gif",
+        "bp": "883"
     },
     {
+        "bossName": "DoruGreymon",
         "stage": "146",
         "cooldown": "60",
-        "bossUrl": "https://digipets.net/recursos/img/digimons/DoruGreymon.gif"
+        "bossUrl": "https://digipets.net/recursos/img/digimons/DoruGreymon.gif",
+        "bp": "1474"
     },
     {
-        "stage": "146",
-        "cooldown": "60",
-        "bossUrl": "https://digipets.net/recursos/img/digimons/DoruGreymon.gif"
-    },
-    {
+        "bossName": "Dorugoramon",
         "stage": "381",
         "cooldown": "70",
-        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorugoramon.gif"
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorugoramon.gif",
+        "bp": "2184"
     }
 ]
 
@@ -964,6 +970,7 @@ const battleFinishObserver = (currentBoss) =>{
                     }
                 })
             }
+            
             appendHealButton();
             chrome.runtime.sendMessage(JSON.stringify({message: 'bossAlert', content: currentBoss}))
             observerInstance.disconnect()
