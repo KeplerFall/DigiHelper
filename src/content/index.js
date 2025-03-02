@@ -820,6 +820,39 @@ const bossInfo = [
         }
 ]
 
+const digitamas = [
+    {
+        "stage": "143",
+        "cooldown": "15",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorimon.gif"
+    },
+    {
+        "stage": "144",
+        "cooldown": "30",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorumon.gif"
+    },
+    {
+        "stage": "145",
+        "cooldown": "45",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorugamon.gif"
+    },
+    {
+        "stage": "146",
+        "cooldown": "60",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/DoruGreymon.gif"
+    },
+    {
+        "stage": "146",
+        "cooldown": "60",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/DoruGreymon.gif"
+    },
+    {
+        "stage": "381",
+        "cooldown": "70",
+        "bossUrl": "https://digipets.net/recursos/img/digimons/Dorugoramon.gif"
+    }
+]
+
 const appendBossButton = (href) =>{
     if(document.querySelector("#kf-goToNextBoss")) return;
     const nextBossButton = document.createElement('a')
@@ -914,22 +947,25 @@ const battleFinishObserver = (currentBoss) =>{
                 chrome.storage.local.get(["bossCooldown"], ({bossCooldown})=>{
                     let searchParams = new URLSearchParams(window.location.search)
                     let currentStage = String(searchParams.get("estagio"))
-                    for(let i = 0; i < bossInfo.length; i++){
-                        if(bossInfo[i].stage == currentStage) continue;
-                        let cooldownReference = bossCooldown.find(item => item.stage == bossInfo[i].stage);
-                        if(!cooldownReference){
-                            appendBossButton(bossInfo[i].stage)
-                            break;
-                        }
-                        let cooldownDate = new Date(cooldownReference.cooldown);
-                        if(cooldownDate < Date.now()){
-                            appendBossButton(bossInfo[i].stage)
-                            break;
+                    if(bossInfo.find(itm => itm.stage == currentBoss.stage)){
+                        for(let i = 0; i < bossInfo.length; i++){
+                            if(bossInfo[i].stage == currentStage) continue;
+                            let cooldownReference = bossCooldown.find(item => item.stage == bossInfo[i].stage);
+                            if(!cooldownReference){
+                                appendBossButton(bossInfo[i].stage)
+                                break;
+                            }
+                            let cooldownDate = new Date(cooldownReference.cooldown);
+                            if(cooldownDate < Date.now()){
+                                appendBossButton(bossInfo[i].stage)
+                                break;
+                            }
                         }
                     }
                 })
             }
             appendHealButton();
+            chrome.runtime.sendMessage(JSON.stringify({message: 'bossAlert', content: currentBoss}))
             observerInstance.disconnect()
         }
     })
@@ -967,6 +1003,15 @@ switch(window.location.pathname){
         const battleParams = new URLSearchParams(window.location.search);
         const currentStage = battleParams.get("estagio");
         const bossBattle = bossInfo.find(item=> item.stage == currentStage)
-        battleFinishObserver(bossBattle)
+        const digitamaBattle = digitamas.find(item => item.stage == currentStage)
+        battleFinishObserver(bossBattle || digitamaBattle)
+    break;
+    case '/gearsavannah':
+        const axes = Number(document.querySelector("#Machados").innerHTML)
+        document.querySelector('.seletor_qnt').value = axes > 500 ? '500' : axes > 100 ? '100' : axes > 50 ? '50' : axes > 10 ? '10' : axes > 5 ? '5' : '1';
+    break;
+    case '/icelabyrinths':
+        const pickaxes = Number(document.querySelector("#Picaretas").innerHTML)
+        document.querySelector('.seletor_qnt').value = pickaxes > 500 ? '500' : pickaxes > 100 ? '100' : pickaxes > 50 ? '50' : pickaxes > 10 ? '10' : pickaxes > 5 ? '5' : '1';
     break;
 }
