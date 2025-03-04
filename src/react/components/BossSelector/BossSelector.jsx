@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import bossInfo from "../../../utils/bossInfo.json";
 
-export default function BossSelector() {
+export default function BossSelector({backstate}) {
     const [bossList, setBossList] = useState([]);
     const [countdownTimers, setCountdownTimers] = useState({});
     const [cooldownAlert, setCooldownAlert] = useState([])
@@ -54,8 +54,30 @@ export default function BossSelector() {
         });
     }
 
+    const searchNextBoss = ()=>{
+        chrome.storage.local.get(["bossCooldown"], ({bossCooldown})=>{
+            for(let i = 0; i < bossInfo.length; i++){
+                let cooldownReference = bossCooldown.find(item => item.stage == bossInfo[i].stage);
+                if(!cooldownReference){
+                    goToBoss(bossInfo[i].stage)
+                    break;
+                }
+                let cooldownDate = new Date(cooldownReference.cooldown);
+                if(cooldownDate < Date.now()){
+                    goToBoss(bossInfo[i].stage)
+                    break;
+                }
+            }
+        })
+    }
+
     return (
-        <div className="grid grid-cols-4 min-w-[600px] max-h-[280px] overflow-y-scroll [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300">
+       <>
+       <div className="flex py-2 justify-between mx-[5px]">
+                <button className=" cursor-pointer bg-red-600 text-white font-bold py-2 px-4 rounded-sm" onClick={()=> backstate(null)}>voltar</button>
+            <button onClick={()=> searchNextBoss()} className="cursor-pointer bg-[#337ab7] text-white font-bold py-2 px-4 rounded-sm">Continuar Boss Rush</button>
+       </div>
+         <div className="grid grid-cols-4 min-w-[600px] max-h-[280px] overflow-y-scroll [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300">
             {bossInfo.map((item) => {
                 const boss = bossList.find((itm) => itm.stage === item.stage);
                 return (
@@ -80,5 +102,6 @@ export default function BossSelector() {
                 );
             })}
         </div>
+       </>
     )
 }

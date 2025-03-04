@@ -933,6 +933,51 @@ const appendHealButton = () =>{
     
 }
 
+const appendGachaButtons = () =>{
+    
+    const getAllGolden = document.createElement('button');
+    getAllGolden.innerHTML = "Ai butãozinho"
+
+    getAllGolden.addEventListener('click', ()=>{
+        const goldenQuantity = Number(document.querySelector('#MeuGoldenTokens')?.innerHTML)
+        const silverQuantity = Number(document.querySelector('#MeuGoldenTokens')?.innerHTML)
+
+        fetch('/ajax/gachapon/advanced.php', {
+            method: "POST",
+            headers:{
+                'Accept': 'application/json, text/javascript, */*; q=0.01',
+                'Accept-encoding': 'gzip, deflate, br, zstd',
+                'accept-language': 'pt-BR,pt;q=0.7',
+                'Content-Length': '4',
+                'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Cookie': document.cookie,
+                'Origin': 'https://digipets.net',
+                'Priority': 'u=1, i',
+                'Sec-ch-ua': '"Not(A:Brand";v="99", "Brave";v="133", "Chromium";v="133"',
+                'Sec-Ch-Ua-Mobile': '?0',
+                'Sec-Ch-Ua-Platform': 'Windows',
+                'Sec-Fetch-Dest': 'empty',
+                'Sec-Fetch-Mode': 'cors',
+                'Sec-Fetch-Site': 'same-origin',
+                'Sec-Gpc': '1',
+                'Referer':'https://digipets.net',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36',
+                "X-Requested-With": "XMLHttpRequest"
+            },
+            body: 'id=2'
+        }).then(res=>{
+            if(!res){
+                throw new Error(`Erro no http`, res.status)
+            }
+            return res.json();
+        }).then((res)=>{
+            console.log(res)
+        })
+    })
+
+    document.querySelector('#ComprarGacha2_2').parentElement.append(getAllGolden)
+}
+
 const battleFinishObserver = (currentBoss) =>{
     const bfObserver = new MutationObserver((mutationList, observerInstance)=>{
         //Start checking if boss is on cooldown
