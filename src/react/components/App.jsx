@@ -1,15 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BossSelector from "./BossSelector/BossSelector";
 import Digitamas from "./Digitamas/Digitamas";
 import Credits from "./Credits/Credits";
 import UnderConstruction from "./UnderConstruction/UnderConstruction";
 import Infos from "./Infos/Infos";
 import Daily from "./Daily/Daily";
+import Sexp from "./Sexp/Sexp";
 
 const App = () => {
   const [currentState, setCurrentState] = useState(null)
+  const [notify, setNotify] = useState(null)
+
+  useEffect(()=>{
+    if (notify == null) return;
+    const timeout = setTimeout(() => {
+      setNotify(null);
+    }, 2000);
+
+    return () => clearTimeout(timeout);
+  }, [notify])
+
   return (
-    <main className="main">
+    <main className="main relative">
       {currentState == null ?
       <div className="grid grid-cols-3 min-w-[360px] py-4 px-1 gap-2">
         <div className="flex flex-col items-center">
@@ -37,12 +49,12 @@ const App = () => {
         <div className="flex flex-col items-center">
           <img src={`https://www.svgrepo.com/show/479915/daily-calendar.svg`} width={30} alt="" />
           <div onClick={() => setCurrentState("daily")} style={{margin: '10px 0'}} className=" cursor-pointer bg-[#337ab7] text-white font-bold py-2 px-4 rounded-sm w-full text-center">Diários</div>
-        </div>*/}
+        </div>*/
+        }
       </div>
       : currentState == "bossrush" ?
       <div>
-        
-        <BossSelector backstate={setCurrentState} />
+        <BossSelector notifyState={[notify, setNotify]} backstate={setCurrentState} />
       </div>
       :
       currentState == "digitamas" ? 
@@ -58,7 +70,7 @@ const App = () => {
         <div className="p-2">
           <button className=" cursor-pointer bg-red-600 text-white font-bold py-2 px-4 rounded-sm" onClick={()=> setCurrentState(null)}>voltar</button>
         </div>
-        <UnderConstruction />
+        <Sexp />
       </div>
       :
       currentState == "infos" ?
@@ -80,6 +92,9 @@ const App = () => {
       :
       null}
       <Credits />
+      <div className={`absolute left-[10px] bottom-[45px] px-[15px] py-[5px] bg-white rounded-[8px]  transition-all durantion-300 ${notify ? `!translate-y-[0px] opacity-100 z-50` : `translate-y-[15px] opacity-0 -z-50`}`}>
+        {notify}
+      </div>
     </main>
   );
 };

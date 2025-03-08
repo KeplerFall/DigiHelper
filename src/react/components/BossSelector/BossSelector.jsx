@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import bossInfo from "../../../utils/bossInfo.json";
 
-export default function BossSelector({backstate}) {
+export default function BossSelector({backstate, notifyState}) {
     const [bossList, setBossList] = useState([]);
     const [countdownTimers, setCountdownTimers] = useState({});
     const [cooldownAlert, setCooldownAlert] = useState([])
+    const [ignoredBoss, setIgnoredBoss] = useState([])
+    const [notify, setNotify] = notifyState;
 
     useEffect(() => {
-        chrome.storage.local.get(["bossCooldown", "bossAlert"], (data) => {
+        chrome.storage.local.get(["bossCooldown", "bossAlert", "ignoredBoss"], (data) => {
             setCooldownAlert(data?.bossAlert || []);
             setBossList(data?.bossCooldown || []);
+            setIgnoredBoss(data?.ignoredBoss || []);
         });
     },[]);
 
@@ -29,7 +32,7 @@ export default function BossSelector({backstate}) {
                 }
             });
             setCountdownTimers(updatedTimers);
-        }, 1000);
+        }, 2000);
 
         return () => clearInterval(interval);
     }, [bossList]);
@@ -54,9 +57,22 @@ export default function BossSelector({backstate}) {
         });
     }
 
-    const searchNextBoss = ()=>{
-        chrome.storage.local.get(["bossCooldown"], ({bossCooldown})=>{
+    const toggleIgnoreBoss = (arg) =>{
+        chrome.storage.local.get(["ignoredBoss"], ({ignoredBoss}) => {
+            if(!ignoredBoss){
+                chrome.storage.local.set({ignoredBoss: [arg]});
+            }else if(ignoredBoss.includes(arg)){
+                chrome.storage.local.set({ignoredBoss: ignoredBoss.filter(item => item != arg)})
+            }else{
+                chrome.storage.local.set({ignoredBoss: [...ignoredBoss, arg]})
+            }
+        });
+    }
+
+    const searchNextBoss = ()=>{ 
+        chrome.storage.local.get(["bossCooldown", "ignoredBoss"], ({bossCooldown, ignoredBoss})=>{
             for(let i = 0; i < bossInfo.length; i++){
+                if(ignoredBoss.includes(bossInfo[i].stage)) continue; 
                 let cooldownReference = bossCooldown.find(item => item.stage == bossInfo[i].stage);
                 if(!cooldownReference){
                     goToBoss(bossInfo[i].stage)
@@ -92,10 +108,16 @@ export default function BossSelector({backstate}) {
                                     <p className="cursor-not-allowed bg-[#d9534f] text-white font-bold py-2 px-4 rounded-sm">{countdownTimers[boss.stage] || "..."}</p>
                                 </div>
                                 }
-                                <button className={`relative group cursor-pointer h-[34px] w-[34px] flex items-center justify-center rounded-sm ${cooldownAlert.includes(item.stage) ? 'bg-[green]' : 'bg-[#d9534f]'}`} onClick={()=>{toggleAlarmList(item.stage); setCooldownAlert(cooldownAlert.includes(item.stage) ? cooldownAlert.filter(itm => itm != item.stage) : [...cooldownAlert, item.stage])}}>
+                                <button className={`relative group cursor-pointer h-[34px] w-[34px] flex items-center justify-center rounded-sm ${cooldownAlert.includes(item.stage) ? 'bg-[green]' : 'bg-[#d9534f]'}`} onClick={()=>{setNotify(`${item.bossName} ${!cooldownAlert.includes(item.stage) ? `adicionado` : `removido`} dos alarmes.`) ;toggleAlarmList(item.stage); setCooldownAlert(cooldownAlert.includes(item.stage) ? cooldownAlert.filter(itm => itm != item.stage) : [...cooldownAlert, item.stage])}}>
                                     <img src="https://www.svgrepo.com/show/532090/alarm-exclamation.svg" className="w-[25px] w-[25px] text-white invert" alt="" />
-                                    
                                 </button>
+                            </div>
+                            <div className="absolute right-[10px] top-[10px] text-red cursor-default" onClick={()=> {setNotify(`${item.bossName} ${ignoredBoss.includes(item.stage) ? `removido` : `adicionado`} a lista de ignorados.`);toggleIgnoreBoss(item.stage); setIgnoredBoss(ignoredBoss.includes(item.stage) ? ignoredBoss.filter(itm => itm != item.stage) : [...ignoredBoss, item.stage])}}>
+                                <div className="relative">
+                                    <div className={`w-[25px] h-[25px] rounded-[8px] flex items-center justify-center text-white ${ignoredBoss.includes(item.stage) ? `bg-[#d9534f]` : `bg-gray-400`} font-bold`}>
+                                        ✓
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>  

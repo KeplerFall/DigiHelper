@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "DigiPets Helper",
   "description": "Criado com carinho pra ajudar todos os digiescolhidos.",
-  "permissions": ["storage", "tabs", "notifications","alarms"],
+  "permissions": ["storage", "notifications","alarms"],
   "version": "1.0.2",
   "action": {
     "default_popup": "index.html"

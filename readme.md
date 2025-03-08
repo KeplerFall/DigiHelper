@@ -28,6 +28,12 @@ Versão 1.0.1
 - Sistema de temporizador de Digitamas
     - Temporizador dos digitamas atualizado.
 
+### V1.0.3
+- Ignorar Boss
+    - Adicionado a função de marcar qual boss não deve ser incluido na bossrush.
+- Notifyssss
+    - Adicionado sistema de notificações para facilitar o entendimento dos sistemas.
+
 ## Roadmap
 - Indexação de todas as S.EXP pra facilitar farm específico.
 ## Propósito

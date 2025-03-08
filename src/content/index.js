@@ -995,11 +995,12 @@ const battleFinishObserver = (currentBoss) =>{
         if(repeat_button.checkVisibility()){
             if(!repeat_button.disabled && currentBoss){
                 addBossCooldown(currentBoss);
-                chrome.storage.local.get(["bossCooldown"], ({bossCooldown})=>{
+                chrome.storage.local.get(["bossCooldown", "ignoredBoss"], ({bossCooldown, ignoredBoss})=>{
                     let searchParams = new URLSearchParams(window.location.search)
                     let currentStage = String(searchParams.get("estagio"))
                     if(bossInfo.find(itm => itm.stage == currentBoss.stage)){
                         for(let i = 0; i < bossInfo.length; i++){
+                            if(ignoredBoss && ignoredBoss?.includes(bossInfo[i].stage)) continue
                             if(bossInfo[i].stage == currentStage) continue;
                             let cooldownReference = bossCooldown.find(item => item.stage == bossInfo[i].stage);
                             if(!cooldownReference){
