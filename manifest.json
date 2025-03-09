@@ -3,7 +3,7 @@
   "name": "DigiPets Helper",
   "description": "Criado com carinho pra ajudar todos os digiescolhidos.",
   "permissions": ["storage", "notifications","alarms"],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "action": {
     "default_popup": "index.html"
   },

@@ -31,8 +31,10 @@ Versão 1.0.3
 ### V1.0.3
 - Ignorar Boss
     - Adicionado a função de marcar qual boss não deve ser incluido na bossrush.
-- Notifyssss
+- Notifys
     - Adicionado sistema de notificações para facilitar o entendimento dos sistemas.
+- Update nos timers
+    - Como na nova versão do DigiPets, os bosses tem diferentes cooldowns, todos foram atualizados.
 
 ## Roadmap
 - Indexação de todas as S.EXP pra facilitar farm específico.
