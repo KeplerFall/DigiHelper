@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useDeferredValue  } from "react";
 import bossInfo from "../../../utils/bossInfo.json";
 
 export default function BossSelector({backstate, notifyState}) {
@@ -7,6 +7,9 @@ export default function BossSelector({backstate, notifyState}) {
     const [cooldownAlert, setCooldownAlert] = useState([])
     const [ignoredBoss, setIgnoredBoss] = useState([])
     const [notify, setNotify] = notifyState;
+    const [query, setQuery] = useState('');
+    const deferredQuery = useDeferredValue(query);
+    const searchRegex = new RegExp(`.*${deferredQuery.toLocaleLowerCase()}.*`);
 
     useEffect(() => {
         chrome.storage.local.get(["bossCooldown", "bossAlert", "ignoredBoss"], (data) => {
@@ -90,12 +93,17 @@ export default function BossSelector({backstate, notifyState}) {
     return (
        <>
        <div className="flex py-2 justify-between mx-[5px]">
-                <button className=" cursor-pointer bg-red-600 text-white font-bold py-2 px-4 rounded-sm" onClick={()=> backstate(null)}>voltar</button>
+            <button className="cursor-pointer bg-red-600 text-white font-bold py-2 px-4 rounded-sm" onClick={()=> backstate(null)}>voltar</button>
+            <div className="border border-gray-200 bg-gray-100 rounded-sm flex">
+                <input className="!outline-none px-[30px] h-full border-none focus:border-transparent focus:ring-0" type="text" value={query} onChange={e => setQuery(e.target.value)} placeholder="Procurar boss..."/>
+                <p onClick={()=> setQuery('')} className={`${deferredQuery ? `` : `hidden`} h-fit rotate-45 w-fit text-[20px] text-gray-400 cursor-pointer`}>+</p>
+            </div>
             <button onClick={()=> searchNextBoss()} className="cursor-pointer bg-[#337ab7] text-white font-bold py-2 px-4 rounded-sm">Continuar Boss Rush</button>
        </div>
          <div className="grid grid-cols-4 min-w-[600px] max-h-[280px] overflow-y-scroll [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300">
             {bossInfo.map((item) => {
                 const boss = bossList.find((itm) => itm.stage === item.stage);
+                if((deferredQuery != "") && !searchRegex.test(item.bossName.toLocaleLowerCase())) return;
                 return (
                     <div key={item.stage} style={{backgroundPositionY: `-60px`}} className="relative min-w-[80px] min-h-[200px] flex flex-col justify-end items-center bg-[url('https://digipets.net/recursos/img/etc/caixadigimon.png')] bg-[length:326px] bg-top bg-[position-y:-60px] rounded-[12px] m-[5px]">
                         <img src={item?.bossUrl} width={80} alt="Boss" />
@@ -124,6 +132,6 @@ export default function BossSelector({backstate, notifyState}) {
                 );
             })}
         </div>
-       </>
+       </> 
     )
 }

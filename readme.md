@@ -1,5 +1,5 @@
 # DigiPets Helper
-Versão 1.0.3
+Versão 1.0.4
 ### Link oficial da extensão.
 [Chrome Extension Store](https://chromewebstore.google.com/detail/digipets-helper/fofabjnjiieenlcihcmlgpilcmidcnbp?authuser=0&hl=pt-BR)
 ### Funcionalidades
@@ -35,6 +35,10 @@ Versão 1.0.3
     - Adicionado sistema de notificações para facilitar o entendimento dos sistemas.
 - Update nos timers
     - Como na nova versão do DigiPets, os bosses tem diferentes cooldowns, todos foram atualizados.
+
+### V1.0.4
+- Melhoria no Boss Ruhs
+    - Adicionado barra de busca para facilitar encontrar boss específico
 
 ## Roadmap
 - Indexação de todas as S.EXP pra facilitar farm específico.
