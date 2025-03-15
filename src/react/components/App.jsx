@@ -6,6 +6,7 @@ import UnderConstruction from "./UnderConstruction/UnderConstruction";
 import Infos from "./Infos/Infos";
 import Daily from "./Daily/Daily";
 import Sexp from "./Sexp/Sexp";
+import Configuration from "./Configuration/Configuration";
 
 const App = () => {
   const [currentState, setCurrentState] = useState(null)
@@ -37,15 +38,15 @@ const App = () => {
           <div onClick={() => setCurrentState("sexp")} style={{margin: '10px 0'}} className=" cursor-pointer bg-[#337ab7] text-white font-bold py-2 px-4 rounded-sm w-full text-center">Experiência</div>
         </div>
         <div className="flex flex-col items-center">
+          <img src={`https://www.svgrepo.com/show/532244/gear.svg`} width={30} alt="" />
+          <div onClick={() => setCurrentState("config")} style={{margin: '10px 0'}} className=" cursor-pointer bg-[#337ab7] text-white font-bold py-2 px-4 rounded-sm w-full text-center">Configurações</div>
+        </div>
+        <div className="flex flex-col items-center">
           <img src={`https://www.svgrepo.com/show/513832/info-circle.svg`} width={30} alt="" />
           <div onClick={() => setCurrentState("infos")} style={{margin: '10px 0'}} className=" cursor-pointer bg-[#337ab7] text-white font-bold py-2 px-4 rounded-sm w-full text-center">Informações</div>
         </div>
         {
         /*
-        <div className="flex flex-col items-center">
-          <img src={`https://www.svgrepo.com/show/532244/gear.svg`} width={30} alt="" />
-          <div onClick={() => setCurrentState("infos")} style={{margin: '10px 0'}} className=" cursor-pointer bg-[#337ab7] text-white font-bold py-2 px-4 rounded-sm w-full text-center">Configurações</div>
-        </div>
         <div className="flex flex-col items-center">
           <img src={`https://www.svgrepo.com/show/479915/daily-calendar.svg`} width={30} alt="" />
           <div onClick={() => setCurrentState("daily")} style={{margin: '10px 0'}} className=" cursor-pointer bg-[#337ab7] text-white font-bold py-2 px-4 rounded-sm w-full text-center">Diários</div>
@@ -70,7 +71,7 @@ const App = () => {
         <div className="p-2">
           <button className=" cursor-pointer bg-red-600 text-white font-bold py-2 px-4 rounded-sm" onClick={()=> setCurrentState(null)}>voltar</button>
         </div>
-        <Sexp />
+        <UnderConstruction />
       </div>
       :
       currentState == "infos" ?
@@ -89,6 +90,14 @@ const App = () => {
         </div>
         <Daily />
       </div>
+       :
+       currentState == "config" ? 
+       <div>
+         <div className="p-2">
+           <button className=" cursor-pointer bg-red-600 text-white font-bold py-2 px-4 rounded-sm" onClick={()=> setCurrentState(null)}>voltar</button>
+         </div>
+         <Configuration notifyState={[notify, setNotify]} />
+       </div>
       :
       null}
       <Credits />

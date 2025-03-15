@@ -330,7 +330,7 @@ const bossInfo = [
         },
         {
         "bp": "2934",
-        "stage": "90",
+        "stage": "270",
         "cooldown": "60",
         "bossName": "Piximon",
         "bossUrl": "https://digipets.net/recursos/img/digimons/Piximon.gif"
@@ -919,7 +919,7 @@ const appendHealButton = () =>{
                     repeat_button.disabled = false;
                 }
             }else{
-                healPartyButton.innerHTML = "Seus digimons não precisam de cura!"
+                healPartyButton.innerHTML = res.mensagem.includes('Aguarde o cooldown') ? "Curas restantes: 0" :"Seus digimons não precisam de cura!"
             }
             
         }).catch(err=>{
@@ -933,50 +933,6 @@ const appendHealButton = () =>{
     
 }
 
-const appendGachaButtons = () =>{
-    
-    const getAllGolden = document.createElement('button');
-    getAllGolden.innerHTML = "Ai butãozinho"
-
-    getAllGolden.addEventListener('click', ()=>{
-        const goldenQuantity = Number(document.querySelector('#MeuGoldenTokens')?.innerHTML)
-        const silverQuantity = Number(document.querySelector('#MeuGoldenTokens')?.innerHTML)
-
-        fetch('/ajax/gachapon/advanced.php', {
-            method: "POST",
-            headers:{
-                'Accept': 'application/json, text/javascript, */*; q=0.01',
-                'Accept-encoding': 'gzip, deflate, br, zstd',
-                'accept-language': 'pt-BR,pt;q=0.7',
-                'Content-Length': '4',
-                'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                'Cookie': document.cookie,
-                'Origin': 'https://digipets.net',
-                'Priority': 'u=1, i',
-                'Sec-ch-ua': '"Not(A:Brand";v="99", "Brave";v="133", "Chromium";v="133"',
-                'Sec-Ch-Ua-Mobile': '?0',
-                'Sec-Ch-Ua-Platform': 'Windows',
-                'Sec-Fetch-Dest': 'empty',
-                'Sec-Fetch-Mode': 'cors',
-                'Sec-Fetch-Site': 'same-origin',
-                'Sec-Gpc': '1',
-                'Referer':'https://digipets.net',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36',
-                "X-Requested-With": "XMLHttpRequest"
-            },
-            body: 'id=2'
-        }).then(res=>{
-            if(!res){
-                throw new Error(`Erro no http`, res.status)
-            }
-            return res.json();
-        }).then((res)=>{
-            console.log(res)
-        })
-    })
-
-    document.querySelector('#ComprarGacha2_2').parentElement.append(getAllGolden)
-}
 
 const battleFinishObserver = (currentBoss) =>{
     const bfObserver = new MutationObserver((mutationList, observerInstance)=>{
@@ -1033,19 +989,19 @@ const battleFinishObserver = (currentBoss) =>{
 function addBossCooldown({stage, cooldown}){
     if(!stage || !cooldown) return;
 
-    chrome.storage.local.get(["bossCooldown"], ({bossCooldown})=>{
+    chrome.storage.local.get(["bossCooldown", "configs"], ({bossCooldown, configs})=>{
         if(!bossCooldown){
-            chrome.storage.local.set({bossCooldown: [{stage: stage, cooldown: (new Date(Date.now() + Number(cooldown) * 60 * 1000)).toString()}]})
+            chrome.storage.local.set({bossCooldown: [{stage: stage, cooldown: (new Date(Date.now() + ((Number(cooldown)* (configs?.includes('mattOmni') ? 0.9 : 1)) * 60 * 1000))).toString()}]})
             return;
         }
         if(bossCooldown.find(item=> item.stage == stage) == undefined){
-            chrome.storage.local.set({bossCooldown: [...bossCooldown, {stage: stage, cooldown: (new Date(Date.now() + Number(cooldown) * 60 * 1000)).toString()}]})
+            chrome.storage.local.set({bossCooldown: [...bossCooldown, {stage: stage, cooldown: (new Date(Date.now() + (Number(cooldown) * (configs?.includes('mattOmni') ? 0.9 : 1)) * 60 * 1000)).toString()}]})
             return;
         }
         chrome.storage.local.set({bossCooldown: bossCooldown.map(item=>{
             return item.stage == stage ? {
                 stage: stage,
-                cooldown: (new Date(Date.now() + Number(cooldown) * 60 * 1000)).toString()
+                cooldown: (new Date(Date.now() + (Number(cooldown) * (configs?.includes('mattOmni') ? 0.9 : 1)) * 60 * 1000)).toString()
             } : item
         })})
     })
